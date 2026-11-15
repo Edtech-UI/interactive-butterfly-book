@@ -1,0 +1,334 @@
+/* =================================================================
+   1. الإعدادات العامة والخلفية
+   ================================================================= */
+body {
+  font-family: "Tajawal", sans-serif;
+  background-image: url("images/intro.png");
+  background-size: cover;
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+.font-kids {
+  font-family: "Cairo", sans-serif;
+}
+
+/* =================================================================
+   2. تصميم إطار الكتاب وظلال الصفحات
+   ================================================================= */
+.book-perspective {
+  perspective: 2200px;
+}
+
+.book-card {
+  background: #ffffff;
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.12),
+    6px 6px 0px #fefce8,
+    10px 10px 0px #fde047,
+    14px 14px 15px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.35s ease,
+    opacity 0.3s ease;
+}
+
+/* الخط الفاصل بين صفحتي الكتاب (يظهر على الشاشات الكبيرة فقط min-width: 768px) */
+.open-book-spread {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .open-book-spread::after {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(180, 145, 70, 0.08) 42%,
+      rgba(120, 90, 40, 0.18) 50%,
+      rgba(180, 145, 70, 0.08) 58%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    border-left: 1px dashed rgba(202, 138, 4, 0.25);
+    border-right: 1px dashed rgba(202, 138, 4, 0.25);
+    pointer-events: none;
+    z-index: 15;
+  }
+}
+
+/* تصميم الغلاف الخلفي (الصفحة 11) */
+.back-cover-style {
+  background: linear-gradient(
+    135deg,
+    #ecfdf5 0%,
+    #fefce8 50%,
+    #dcfce7 100%
+  ) !important;
+  border-color: #facc15 !important;
+}
+
+/* زاوية الصفحة المطوية في الأسفل */
+.page-corner-curl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(
+    135deg,
+    transparent 48%,
+    rgba(0, 0, 0, 0.06) 50%,
+    #fef9c3 54%,
+    #fde047 100%
+  );
+  border-top-right-radius: 14px;
+  border-bottom-left-radius: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+@media (min-width: 768px) {
+  .page-corner-curl {
+    width: 44px;
+    height: 44px;
+  }
+  .page-corner-curl:hover {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+/* =================================================================
+   3. الحركات والأنيميشن (Animations)
+   ================================================================= */
+/* حركة الطفو الناعمة للدوائر */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float {
+  animation: float 3.2s ease-in-out infinite;
+}
+
+/* حركة الاهتزاز عند الطرق أو الخطأ */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  75% {
+    transform: translateX(8px);
+  }
+}
+.animate-shake {
+  animation: shake 0.35s ease-in-out;
+}
+
+/* حركة الفراشات الطائرة في الخلفية */
+@keyframes flyAcross {
+  0% {
+    transform: translate(110vw, 15vh) rotate(-10deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(45vw, -5vh) rotate(12deg) scale(1);
+  }
+  85% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-20vw, 20vh) rotate(-8deg) scale(0.85);
+    opacity: 0;
+  }
+}
+.bg-butterfly {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  animation: flyAcross 22s linear infinite;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+}
+
+/* حركة لمعان النجوم والقطرات */
+@keyframes pulseGlow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.9;
+  }
+}
+.sparkle-particle {
+  position: absolute;
+  pointer-events: none;
+  animation: pulseGlow 2.4s ease-in-out infinite;
+}
+
+/* حركة ظهور النجمة المكتسبة في الشريط العلوي */
+@keyframes starPop {
+  0% {
+    transform: scale(0.5) rotate(-25deg);
+  }
+  60% {
+    transform: scale(1.35) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+.star-earned {
+  animation: starPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.85));
+}
+
+/* حركة رفرفة الفراشة عند الضغط */
+@keyframes butterflyFlutter {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.15, 0.9) rotate(-5deg);
+  }
+  50% {
+    transform: scale(0.92, 1.1) rotate(5deg);
+  }
+  75% {
+    transform: scale(1.1, 0.95) rotate(-3deg);
+  }
+}
+.flutter-active {
+  animation: butterflyFlutter 0.6s ease-in-out;
+}
+
+/* حركة دوران بطيء لصورة دورة الحياة */
+@keyframes slowSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: slowSpin 28s linear infinite;
+}
+
+/* حركة تمايل الشرنقة المعلقة */
+@keyframes cocoonSwing {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+    transform-origin: top center;
+  }
+  50% {
+    transform: rotate(4deg);
+    transform-origin: top center;
+  }
+}
+.cocoon-swing {
+  animation: cocoonSwing 3s ease-in-out infinite;
+}
+
+/* =================================================================
+   4. النصوص الناطقة وأجزاء التلوين
+   ================================================================= */
+.speakable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 0.75rem;
+  padding: 0.2rem 0.4rem;
+}
+.speakable:hover {
+  background-color: rgba(254, 249, 195, 0.75);
+}
+
+.wing-part {
+  cursor: pointer;
+  transition:
+    fill 0.25s ease,
+    opacity 0.2s ease;
+}
+.wing-part:hover {
+  opacity: 0.88;
+}
+/* حركة غزل الخيوط السريعة للدودة قبل تحولها لشرنقة */
+@keyframes spinSilk {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.08) rotate(-12deg);
+  }
+  50% {
+    transform: scale(0.95) rotate(12deg);
+  }
+  75% {
+    transform: scale(1.08) rotate(-8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.silk-spinning {
+  animation: spinSilk 0.65s ease-in-out;
+}
+
+/* حركة ظهور الشرنقة المكتملة بقفزة مبهجة (Pop-in) */
+@keyframes cocoonPopIn {
+  0% {
+    transform: scale(0.4) rotate(-10deg);
+    opacity: 0.3;
+  }
+  65% {
+    transform: scale(1.12) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.cocoon-revealed {
+  animation:
+    cocoonPopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+    cocoonSwing 3s ease-in-out 0.6s infinite;
+}
+/* دوران عكسي للصور داخل دائرة دورة الحياة حتى تبقى معدولة أثناء الدوران */
+@keyframes counterSpin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.cycle-node img {
+  animation: counterSpin 28s linear infinite;
+}
