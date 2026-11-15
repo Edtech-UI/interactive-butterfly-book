@@ -3,9 +3,6 @@
 # 🦋 كتاب تفاعلي: دورة حياة الفراشة
 ### Interactive Digital Storybook for Kids (Ages 4–6)
 
-![الفئة العمرية](https://img.shields.io/badge/الفئة_العمرية-٤_إلى_٦_سنوات-ff69b4?style=for-the-badge)
-![التخصص](https://img.shields.io/badge/تكنولوجيا_التعليم-Educational_Tech-2ea44f?style=for-the-badge)
-
 كتاب رقمي تعليمي تفاعلي متعدد الوسائط موجه للأطفال من سن **٤ إلى ٦ سنوات**، يستعرض مراحل تحول الفراشة بأسلوب قصصي بصري مشوق يجمع بين التعلم واللعب.
 
 ---
