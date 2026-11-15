@@ -10,7 +10,7 @@
 ### 🌐 رابط تصفح الكتاب مباشرة
 
 > [!TIP]
-> **رابط التشغيل المباشر:** **[اضغط هنا لفتح الكتاب التفاعلي](https://somaiaosama72-hub.github.io/interactive-butterfly-book/)**
+> **رابط التشغيل المباشر:** **[اضغط هنا لفتح الكتاب التفاعلي](https://edtech-ui.github.io/interactive-butterfly-book/)**
 
 ---
 
